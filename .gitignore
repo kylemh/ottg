@@ -608,4 +608,5 @@ paket-files/
 *.odx.cs
 *.xsd.cs
 
-# End of https://www.gitignore.io/api/git,sass,macos,linux,python,pycharm,windows,jetbrains,virtualenv,sublimetext,visualstudio,visualstudiocode
+# End of https://www.gitignore.io/api/git,sass,macos,linux,python,pycharm,windows,jetbrains,virtualenv,sublimetext,visualstudio,visualstudiocodedb.sqlite3
+geckodriver.log
