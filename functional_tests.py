@@ -1,4 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+import time
 import unittest
 
 
@@ -15,19 +18,34 @@ class NewVisitorTest(unittest.TestCase):
 
         # She notices that the page title and header mention "To-Do"
         self.assertIn('To-Do Lists', self.browser.title)
-        self.fail('Finish the test')
+        header_text = self.browser.find_element_by_id('h1').text
+        self.assertIn('To-Do', header_text)
 
         # She is immediately invited to enter a to-do list item
+        input_box = self.browser.find_element_by_id('id_new_item')
+        self.assertEqual(
+            input_box.get_attribute('placeholder'),
+            'Enter a to-do item...'
+        )
 
         # She types "Buy more coffee syrups for the office" into a text box.
+        input_box.send_keys('Buy more coffee syrups for the office')
 
         # When she hits enter, the page updates, and now the page lists...
         # "1: Buy peacock feathers" as an item in a to-do list.
+        input_box.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # There is still a text box inviting to add another item.
         # She enters "Use syrups to make myself a vanilla, iced coffee".
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertTrue(
+            any(row.text == '1: Buy more coffee syrups for the office' for row in rows)
+        )
 
         # The page updates again, and now both items are displayed on her list.
+        self.fail('Finish user story!')
 
         # Terra is curious to see if the website will remember her list.
         # At that same moment, she notices some explanatory text saying that the currently listed
