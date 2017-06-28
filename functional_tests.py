@@ -14,7 +14,7 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get("http://localhost:8000")
 
         # She notices that the page title and header mention "To-Do"
-        self.assertIn('To-Do', self.browser.title)
+        self.assertIn('To-Do Lists', self.browser.title)
         self.fail('Finish the test')
 
         # She is immediately invited to enter a to-do list item
