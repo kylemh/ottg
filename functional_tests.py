@@ -14,12 +14,12 @@ class NewVisitorTest(unittest.TestCase):
 
     def test_can_start_list_and_retrieve_later(self):
         # Terra has heard about a cool, new, online To-Do application. She goes to its homepage.
-        self.browser.get("http://localhost:8000")
+        self.browser.get('http://localhost:8000')
 
         # She notices that the page title and header mention "To-Do"
         self.assertIn('To-Do Lists', self.browser.title)
-        header_text = self.browser.find_element_by_id('h1').text
-        self.assertIn('To-Do', header_text)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Your To-Do List', header_text)
 
         # She is immediately invited to enter a to-do list item
         input_box = self.browser.find_element_by_id('id_new_item')
@@ -41,7 +41,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == '1: Buy more coffee syrups for the office' for row in rows)
+            any(row.text == '1: Buy more coffee syrups for the office' for row in rows),
+            'New to-do item did not appear in table.'
         )
 
         # The page updates again, and now both items are displayed on her list.
